@@ -6,11 +6,12 @@
 //
 
 import UIKit
-import SilentMoonNetwork
+import PresentationLayer
 import SilentMoonDomain
 
+@MainActor
 public final class AppCoordinator: Coordinator {
-    public var childCoordinators: [Coordinator] = []
+    public var childCoordinators: [any Coordinator] = []
     private let window: UIWindow
     private let navigationController = UINavigationController()
     
@@ -29,8 +30,11 @@ public final class AppCoordinator: Coordinator {
     }
 
     private func showBootstrapLoading() {
-        let loadingViewModel = LoadingViewModel { [weak self] in
-            guard let self, self.diContainer.tokenStore.isLoggedIn else {
+        let loadingViewModel = LoadingViewModel {
+            [weak self] () async -> Result<Void, Error> in
+            
+            guard let self, self.diContainer.tokenStore.isLoggedIn
+            else {
                 return .success(())
             }
             return await self.diContainer.repository.refreshToken().map { _ in () }
@@ -62,7 +66,7 @@ public final class AppCoordinator: Coordinator {
         authCoordinator.onFlowFinished = { [weak self] in
             self?.showMainTabBarFlow()
         }
-        childCoordinators = [authCoordinator]
+        childCoordinators = [authCoordinator as any Coordinator]
         authCoordinator.start()
     }
 

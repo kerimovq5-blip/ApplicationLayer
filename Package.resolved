@@ -1,5 +1,5 @@
 {
-  "originHash" : "0f6b7f38e21ff6c8b974f4448e41390f6d85f2d338e4c598bceb566f82f85b8e",
+  "originHash" : "df5c2634cdebf4f6f6e4d63208c410327d1a8458972eaad5e925ab5cabb89ead",
   "pins" : [
     {
       "identity" : "presentationlayer",
@@ -7,7 +7,7 @@
       "location" : "https://github.com/kerimovq5-blip/PresentationLayer",
       "state" : {
         "branch" : "main",
-        "revision" : "eaaa26a04ec437daa09ec09844e151da5438c9ee"
+        "revision" : "1cd7467d931f3f7ab945ba46a382b0f3568db5ba"
       }
     },
     {
